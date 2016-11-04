@@ -12,10 +12,10 @@
 
 .PHONY: all compil clean fclean re run leaks allleaks incl
 	
-NAME	=	a.out
+NAME	=	expert
 
-CC		=	g++ -std=c++11
-FLAGS	=	-Wall -Wextra -Werror
+CC		=	g++ -std=c++11 
+FLAGS	=	-Wall -Wextra -Werror -Wfatal-errors
 
 SDIR	=	src/
 HDIR	=	includes/
@@ -51,9 +51,7 @@ $(ODIR)%.o: $(SDIR)%.$(F_EXT) $(HDR)
 
 clean:
 	@rm -rf $(ODIR)
-	@rm -rf the_norm
 	@rm -rf the_leaks
-	@rm -rf all_incl
 
 fclean: clean
 	@rm -f $(NAME)

@@ -16,12 +16,8 @@ public:
 
 	class Msg : public std::exception {
 	public:
-		Msg(std::string str) { 
-			this->line += str; 
-		}
-		virtual const char *what() const throw() {
-			return (this->line.c_str());
-		}
+		Msg(std::string str) 						{	this->line += str;	}
+		virtual const char *what() const throw() 	{ return (this->line.c_str()); }
 	private:
 		std::string line;
 	};
