@@ -2,6 +2,7 @@
 #include <project.hpp>
 #include "Branch.hpp"
 #include "Parse.hpp"
+#include "mylib.hpp"
 
 Parse::Parse() 						{	this->_val = 0;	}
 
@@ -28,41 +29,14 @@ std::ostream &operator<<(std::ostream &o, Parse &c) {
 int		Parse::getValue() const	{	return (this->_val);	}
 ///////////////////////////////////////////////////////////////////////////////
 
-static std::string trim(std::string str)
-{
-	int st;
-	int end;
-
-	st = str.find_first_not_of(" 	");
-	end = str.find_last_not_of(" 	");
-
-	if ((end > -1 && st > -1))
-		return (str.substr(st, (end - st) + 1));
-	else
-		return ("");
-}
-
-void	Parse::openFile(std::string filename) {
-	this->file.open(filename);
-	if (!this->file.is_open())
-	{
-		std::cout << "Unable to open file: " << filename << std::endl;
-	}
-}
-
-void	Parse::closeFile() {
-	if (this->file.is_open())
-		this->file.close();
-}
-
-std::string	Parse::removeComments(std::string line) {
+std::string		Parse::removeComments(std::string line) {
 	if (line.find_first_of("#") != std::string::npos)
 		line = line.substr(0, line.find_first_of("#"));
-	line = trim(line);
+	line = mylib::trim(line);
 	return (line);
 }
 
-eImplication Parse::get_eImplicationByName(std::string implies) {
+eImplication 	Parse::get_eImplicationByName(std::string implies) {
 
 	if (!implies.compare("=>"))
 		return (eImplication::Simple);	
@@ -72,7 +46,7 @@ eImplication Parse::get_eImplicationByName(std::string implies) {
 		throw Msg("Error when converting implies from string");
 }
 
-void	Parse::parse(std::string line) {
+bool	Parse::parse(std::string line, size_t linePos) {
 	std::smatch res;
 
 	if (std::regex_search(line, res, std::regex(REGEX_GET_RULE)))
@@ -88,56 +62,139 @@ void	Parse::parse(std::string line) {
 		this->querie.push_back(res[1].str());
 	}
 	else
-		std::cout << "Syntax error" << std::endl;
+	{
+		std::cerr << "Syntax error line " << linePos << std::endl;
+		return (false);
+	}
+	return (true);
 }
 
 void	Parse::createTree() {
-	std::smatch res;
 
+	std::smatch res;
+	bool		error = false;
+
+	std::regex r(REGEX_GET_ELEMENT_IN_RULE);
 	for (auto it = this->rule.begin() ; it != this->rule.end() ; ++it)
 	{
-		// if (std::regex_search(it->elem, res, std::regex(REGEX_GET_ELEMENT_IN_RULE)))
-		// {
-		// 	std::cout << "-------------------------" << std::endl;
+		if (std::regex_search(it->elem, res, r))
+		{
+			for(std::sregex_iterator i = std::sregex_iterator(it->elem.begin(), it->elem.end(), r);
+				i != std::sregex_iterator();
+				++i )
+			{
+				res = *i;
+				if (res[1].length())
+					it->item.push_back(res[1]);
+				if (res[2].length())
+					it->optr.push_back(Enum::getLogicOperator(res[2]));
+				if (res[3].length())
+					it->item.push_back(res[3]);
+			}
+		}
+		else
+		{
+			if (std::regex_search(it->elem, res, std::regex(REGEX_GET_ONE_ELEMENT_IN_RULE)))
+			{
+				if (it->elem.length())
+				{
+					it->item.push_back(it->elem);
+					it->optr.push_back(eLogicOperator::None);
+				}
+			}
+			else
+			{
+				error = true;
+				std::cerr << "An error has benn detected in rule: " << it->elem << std::endl;
+			}
+		}
 
-		// 	std::cout << res[1] << std::endl;
-		// 	std::cout << res[2] << std::endl;
-		// 	std::cout << res[3] << std::endl;
-	
+			// for (auto it1 = it->item.begin(); it1 != it->item.end(); ++it1)
+			// {
+			// 	std::cout << "item:      " << *it1 << std::endl;
+			// }
+
+			// for (auto it2 = it->optr.begin(); it2 != it->optr.end(); ++it2)
+			// {
+			// 	std::cout << "optr:      " << Enum::getLogicOperator(*it2) << std::endl;
+			// }
+
+			// auto itm = it->item.begin();
+			// auto op = it->optr.begin();
+			// (void)op;
+			// (void)itm;
+
+			// std::string currentHead;
+
+			// currentHead = it->impliqued;
+			// while (itm != it->item.end())
+			// {
+			// 	std::cout << "created: " << '"' << *itm << '"' << std::endl;
+			// 	Branch *tmp1 = new Branch(*itm, eNegative::False, eValue::Undefined);
+			// 	itm++;
+
+			// 	std::cout << "created: " << '"' << *itm << '"' << std::endl;
+			// 	Branch *tmp2 = new Branch(*itm, eNegative::False, eValue::Undefined);
+			// 	// itm++;
+
+			// 	std::cout << "createbranch: " << '"' << currentHead << '"' << std::endl;
+			// 	Branch *br = new Branch(currentHead, eNegative::False, *op,
+			// 		eValue::Undefined, it->implies, tmp1, tmp2);
+
+			// 	currentHead = *itm;
+			// 	itm++;
+
+			// 	br->print();
+			// 	op++;
 
 
-		// 	std::cout << "-------------------------" << std::endl;
+			// 	(void)br;
+			// 	(void)tmp1;
+			// 	(void)tmp2;
+
+			// }
+
+			// std::cout << "elem:      " << it->elem << std::endl;
+			// std::cout << "implies:   " << static_cast<int>(it->implies) << std::endl;
+			// std::cout << "impliqued: " << it->impliqued << std::endl;
+			// std::cout << std::endl;
+
+			// Branch *a = new Branch("A", eNegative::False, eValue::Undefined);
+			// Branch *b = new Branch("B", eNegative::False, eValue::Undefined);
+
+			// Branch *x = new Branch(it->impliqued, eNegative::False, eLogicOperator::Et,
+			// 	eValue::Undefined, it->implies, a, b);
+
+			// x->print();
 
 		// }
-		// else 
-		// 	throw Msg("Error when retrieving element in rule");
-
-		std::cout << "elem:      " << it->elem << std::endl;
-		std::cout << "implies:   " << static_cast<int>(it->implies) << std::endl;
-		std::cout << "impliqued: " << it->impliqued << std::endl;
-		std::cout << std::endl;
-
-		Branch *a = new Branch("A", eNegative::False, eValue::Undefined);
-		Branch *b = new Branch("B", eNegative::False, eValue::Undefined);
-
-		Branch *x = new Branch(it->impliqued, eNegative::False, eLogicOperator::Et,
-			eValue::Undefined, it->implies, a, b);
-
-		x->print();
-
 	}
-
+	if (error)
+		throw Msg("Some error has been detected");
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 void	Parse::printRule() {
 
 	std::cout << "rule: " << std::endl;
 	for (auto it = this->rule.begin() ; it != this->rule.end() ; ++it)
 	{
-		std::cout << "elem:      " << it->elem << std::endl;
-		std::cout << "implies:   " << static_cast<int>(it->implies) << std::endl;
-		std::cout << "impliqued: " << it->impliqued << std::endl;
+		std::cout << "-----------------------------------" << std::endl;
+		std::cout << "elem:      " << '"' << it->elem << '"' << std::endl;
+		std::cout << "implies:   " << '"' << Enum::getImplication(it->implies) << '"' << std::endl;
+		std::cout << "impliqued: " << '"' << it->impliqued << '"' << std::endl;
 		std::cout << std::endl;
+
+		for (auto it1 = it->item.begin(); it1 != it->item.end(); it1++)
+		{
+			std::cout << "item:      " << '"' << *it1 << '"' << std::endl;
+		}
+		for (auto it1 = it->optr.begin(); it1 != it->optr.end(); it1++)
+		{
+			std::cout << "optr:      " << Enum::getLogicOperator(*it1) << std::endl;
+		}
+		std::cout << "-----------------------------------" << std::endl;
 	}
 }
 
@@ -145,7 +202,7 @@ void	Parse::printFact() {
 
 	for (auto it = this->fact.begin() ; it != this->fact.end() ; ++it)
 	{
-		std::cout << "fact: " << *it << std::endl;
+		std::cout << "fact: " << '"' << *it << '"' << std::endl;
 	}
 }
 
@@ -153,28 +210,54 @@ void	Parse::printQueries() {
 
 	for (auto it = this->querie.begin() ; it != this->querie.end() ; ++it)
 	{
-		std::cout << "querie: " << *it << std::endl;
+		std::cout << "querie: " << '"' << *it << '"' <<  std::endl;
 	}
 }
 
-void	Parse::readFile() {
+///////////////////////////////////////////////////////////////////////////////
+
+void	Parse::openFile(std::string filename) {
+
+	this->file.open(filename);
+	if (!this->file.is_open())
+	{
+		throw Msg("Error: Unable to open file " + filename);
+	}
+}
+
+void	Parse::closeFile() {
+	if (this->file.is_open())
+		this->file.close();
+}
+
+void	Parse::readFile(std::string filename) {
+
+	if (filename.length())
+		openFile(filename);
 
 	std::string line;
+	size_t		linePos = 0;
+	bool		error = false;
 
 	if (this->file.is_open())
 	{
 		while (getline(this->file, line))
 		{
+			++linePos;
 			line = removeComments(line);
-			if (line.length() > 0)
+			if (line.length())
 			{
-				parse(line);
+				if (!parse(line, linePos))
+					error = true;
 			}
 		}
 		closeFile();
 	}
 	else
-		std::cerr << "Please call openFile before" << std::endl;
+		throw Msg("Error: Unable to open file " + filename);
+
+	if (error)
+		throw Msg("Some error has been detected");
 }
 
 void	Parse::empty() {

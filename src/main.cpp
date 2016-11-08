@@ -5,16 +5,18 @@
 
 int main()
 {
+	try
+	{
 	Parse p = Parse();
 
-	p.openFile("rule");
-	p.readFile();
-	p.closeFile();
+	// std::cout << "regex: " << REGEX_GET_ONE_ELEMENT_IN_RULE << std::endl;
+
+	p.readFile("rule");
 	p.createTree();
 
-	// p.printRule();
-	// p.printFact();
-	// p.printQueries();
+	p.printRule();
+	p.printFact();
+	p.printQueries();
 
 
 
@@ -37,6 +39,10 @@ int main()
 	// std::cout << "----------------------------------" << std::endl;
 	// b->print();
 	// x->print();
-
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 	return (0);
 }

@@ -28,6 +28,9 @@ public:
 	std::string 	elem;
 	eImplication	implies;
 	std::string 	impliqued;
+
+	std::vector<std::string> 	item;
+	std::vector<eLogicOperator> optr;
 };
 
 std::ostream &operator<<(std::ostream &o, Rule &c);

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all compil clean fclean re run leaks allleaks incl
+.PHONY: all compil clean fclean re run leaks allleaks coffee want
 	
 NAME	=	expert
 
@@ -37,13 +37,13 @@ OBJ		=	$(patsubst %.$(F_EXT), $(ODIR)%.o, $(SRCA))
 all: compil
 
 compil:
-	@mkdir -p $(ODIR)
 	@echo "\033[32m compiling $(NAME) >>> \c \033[0m"
+	@mkdir -p $(ODIR)
 	@make -j 8 $(NAME)
+	@echo "\033[37m END $(NAME)\033[0m"
 
 $(NAME): $(OBJ) $(SRC)
-	@$(CC) -o $(NAME) $(OBJ) $(LIB)
-	@echo "\033[37m END $(NAME)\033[0m"
+	@$(CC) -o $(NAME) $(OBJ)
 
 $(ODIR)%.o: $(SDIR)%.$(F_EXT) $(HDR)
 	@$(CC) -c $< -o $@ $(FLAGS) $(FOLDER)
@@ -69,8 +69,11 @@ leaks:
 allleaks:
 	@zsh -c "while ((1)) {sleep 1 ; leaks $(NAME) > the_leaks ; clear && cat the_leaks}"
 
-
 coffee:
+	@zsh -c "while ((1)) {make want}"
+
+
+want:
 	@clear
 	@echo "                        \`:.      				"
 	@echo "                          \`:.      				"
@@ -109,3 +112,4 @@ coffee:
 	@echo "    ,--------\`\"\`-------------'--------.      	"
 	@echo "     \`\"--.__                   __.--\"'   	   	"
 	@echo "            \`\"\"-------------\"\"'    			"
+	@sleep 0.5

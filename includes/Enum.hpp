@@ -16,8 +16,10 @@ public:
 	Enum(Enum const &src);
 	Enum &operator=(Enum const &rhs);
 
-	static 	std::string	getLogicOperator(eLogicOperator logicOperator);
-	static 	std::string	getValue(eValue value);
+	static 	std::string		getLogicOperator(eLogicOperator logicOperator);
+	static 	eLogicOperator	getLogicOperator(std::string str);
+	static 	std::string		getValue(eValue value);
+	static 	std::string		getImplication(eImplication value);
 
 	int			getValue() const;
 	void		empty();

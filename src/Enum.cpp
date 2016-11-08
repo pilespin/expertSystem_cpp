@@ -26,18 +26,36 @@ std::ostream &operator<<(std::ostream &o, Enum &c) {
 int		Enum::getValue() const	{	return (this->_val);	}
 ///////////////////////////////////////////////////////////////////////////////
 
-std::string Enum::getLogicOperator(eLogicOperator logicOperator)
+std::string 	Enum::getLogicOperator(eLogicOperator logicOperator)
 {
 	std::vector<std::string> e {"Et", "Ou", "Xor", "None"};
 	return (e[static_cast<int>(logicOperator)]);
 }
 
-std::string Enum::getValue(eValue value)
+eLogicOperator	Enum::getLogicOperator(std::string str)
+{
+	if (!str.compare("+"))
+		return (eLogicOperator::Et);
+	else if (!str.compare("|"))
+		return (eLogicOperator::Ou);
+	else if (!str.compare("^"))
+		return (eLogicOperator::Xor);
+	else
+		throw Msg("Error: When converting string to Enum eLogicOperator");
+}
+
+std::string 	Enum::getValue(eValue value)
 {
 	std::vector<std::string> e {"False", "True", "Undefined"};
 	return (e[static_cast<int>(value)]);
 }
 
-void	Enum::empty() {
+std::string 	Enum::getImplication(eImplication value)
+{
+	std::vector<std::string> e {"Simple", "Double"};
+	return (e[static_cast<int>(value)]);
+}
+
+void			Enum::empty() {
 
 }

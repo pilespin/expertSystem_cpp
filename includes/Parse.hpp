@@ -27,14 +27,14 @@ public:
 	};
 
 	void	openFile(std::string filename);
-	void	readFile();
+	void	readFile(std::string filename = "");
 	void	closeFile();
 	void	createTree();
 
 private:
 	eImplication 	get_eImplicationByName(std::string implies);
 	std::string		removeComments(std::string line);
-	void			parse(std::string line);
+	bool			parse(std::string line, size_t linePos);
 
 	int 			_val;
 	std::ifstream 	file;

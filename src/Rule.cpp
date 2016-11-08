@@ -9,22 +9,6 @@ Rule::Rule(std::string elem, eImplication implies, std::string impliqued) {
 	this->elem = elem;
 	this->implies = implies;
 	this->impliqued = impliqued;
-
-	std::smatch res;
-
-	if (std::regex_search(elem, res, std::regex(REGEX_GET_ELEMENT_IN_RULE)))
-	{
-		std::cout << "-------------------------" << std::endl;
-
-		std::cout << res[1] << std::endl;
-		std::cout << res[2] << std::endl;
-		std::cout << res[3] << std::endl;
-
-		std::cout << "-------------------------" << std::endl;
-
-	}
-	else 
-		throw Msg("Error when retrieving element in rule");
 }
 
 Rule::~Rule()						{}
