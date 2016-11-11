@@ -9,15 +9,17 @@ int main()
 	{
 	Parse p = Parse();
 
-	// std::cout << "regex: " << REGEX_GET_ONE_ELEMENT_IN_RULE << std::endl;
+	p.setMultipleCharInElement();
 
 	p.readFile("rule");
-	p.createTree();
+	p.calcRule();
+	p.createMap();
 
-	p.printRule();
+	// p.printRule();
+	p.printElement();
+	p.forwardChaining();
 	p.printFact();
 	p.printQueries();
-
 
 
 	// Branch *a = new Branch("A", eNegative::False, eValue::True);

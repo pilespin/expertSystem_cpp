@@ -2,6 +2,7 @@
 #pragma once
 
 #include <project.hpp>
+#include "Element.hpp"
 #include "Rule.hpp"
 
 class Parse {
@@ -13,10 +14,18 @@ public:
 	Parse &operator=(Parse const &rhs);
 
 	int			getValue() const;
+	bool 		getMultipleCharInElement();
+	void 		setMultipleCharInElement();
+
 	void		empty();
 	void		printRule();
 	void		printFact();
 	void		printQueries();
+	void		printElement();
+	void 		forwardChaining();
+	void		getFact();
+
+
 
 	class Msg : public std::exception {
 	public:
@@ -29,15 +38,21 @@ public:
 	void	openFile(std::string filename);
 	void	readFile(std::string filename = "");
 	void	closeFile();
-	void	createTree();
+	void	calcRule();
+	void	createMap();
+
 
 private:
+	void 			insertIntoMap(std::string tmp);
 	eImplication 	get_eImplicationByName(std::string implies);
 	std::string		removeComments(std::string line);
-	bool			parse(std::string line, size_t linePos);
+	bool			createRule(std::string line, size_t linePos);
 
 	int 			_val;
+	bool 			multipleCharInElement;
 	std::ifstream 	file;
+
+	std::map<std::string, Element>	mapElem;
 
 	std::list<Rule>			rule;
 	std::list<std::string>	fact;

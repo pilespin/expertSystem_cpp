@@ -10,7 +10,7 @@ public:
 	Rule();
 	~Rule();
 	Rule(Rule const &src);
-	Rule &operator=(Rule const &rhs);
+	// Rule &operator=(Rule const &rhs);
 
 	int			getValue() const;
 	void		empty();

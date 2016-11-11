@@ -20,17 +20,17 @@ Rule::Rule(Rule const &src)	{
 	this->impliqued = src.impliqued;
 }
 
-Rule	&Rule::operator=(Rule const &rhs) {
+// Rule	&Rule::operator=(Rule const &rhs) {
 
-	if (this != &rhs)
-	{
-		this->_val = rhs._val;
-		this->elem = rhs.elem;
-		this->implies = rhs.implies;
-		this->impliqued = rhs.impliqued;
-	}
-	return (*this);
-}
+// 	if (this != &rhs)
+// 	{
+// 		this->_val = rhs._val;
+// 		this->elem = rhs.elem;
+// 		this->implies = rhs.implies;
+// 		this->impliqued = rhs.impliqued;
+// 	}
+// 	return (*this);
+// }
 
 std::ostream &operator<<(std::ostream &o, Rule &c) {
 	o << "Rule: " << c.getValue() << " ";

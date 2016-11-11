@@ -39,7 +39,7 @@ private:
 	std::string 	name;
 	eNegative		negative;
 	eLogicOperator	logicOperator;
-	eValue 			defaultValue;
+	// eValue 			defaultValue;
 	eValue 			value;
 	eImplication 	implies;
 	Branch	 		*left;

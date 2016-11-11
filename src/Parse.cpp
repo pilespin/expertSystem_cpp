@@ -1,10 +1,13 @@
 
 #include <project.hpp>
+#include "Element.hpp"
 #include "Branch.hpp"
 #include "Parse.hpp"
 #include "mylib.hpp"
 
-Parse::Parse() 						{	this->_val = 0;	}
+Parse::Parse() 						{	
+	this->_val = 0;
+}
 
 Parse::~Parse()						{}
 
@@ -26,8 +29,21 @@ std::ostream &operator<<(std::ostream &o, Parse &c) {
 	return (o);
 }
 ///////////////////////////////////////////////////////////////////////////////
-int		Parse::getValue() const	{	return (this->_val);	}
+int		Parse::getValue() const					{	return (this->_val);					}	
+bool	Parse::getMultipleCharInElement()		{	return (this->multipleCharInElement);	}
+void	Parse::setMultipleCharInElement() 		{	this->multipleCharInElement = true;		}
 ///////////////////////////////////////////////////////////////////////////////
+
+void	Parse::getFact() {
+	if (this->getMultipleCharInElement())
+	{
+
+	}
+	else
+	{
+
+	}
+}
 
 std::string		Parse::removeComments(std::string line) {
 	if (line.find_first_of("#") != std::string::npos)
@@ -46,7 +62,7 @@ eImplication 	Parse::get_eImplicationByName(std::string implies) {
 		throw Msg("Error when converting implies from string");
 }
 
-bool	Parse::parse(std::string line, size_t linePos) {
+bool	Parse::createRule(std::string line, size_t linePos) {
 	std::smatch res;
 
 	if (std::regex_search(line, res, std::regex(REGEX_GET_RULE)))
@@ -69,7 +85,7 @@ bool	Parse::parse(std::string line, size_t linePos) {
 	return (true);
 }
 
-void	Parse::createTree() {
+void	Parse::calcRule() {
 
 	std::smatch res;
 	bool		error = false;
@@ -173,12 +189,46 @@ void	Parse::createTree() {
 		throw Msg("Some error has been detected");
 }
 
-///////////////////////////////////////////////////////////////////////////////
+void 	Parse::insertIntoMap(std::string tmp) {
+	if ((tmp).find_first_of("!") == 0)
+		tmp.erase(0, 1);
+	this->mapElem[tmp] = Element(tmp, eValue::Undefined);
+}
+
+void	Parse::createMap() {
+
+	std::string tmp;
+
+	for (auto it = this->rule.begin() ; it != this->rule.end() ; it++) {
+		for (auto it1 = it->item.begin() ; it1 != it->item.end() ; it1++) {
+			insertIntoMap(*it1);
+		}
+		insertIntoMap(it->impliqued);
+	}
+}
+
+void	Parse::forwardChaining() {
+
+	for(auto it = this->mapElem.begin(); it != this->mapElem.end(); it++)
+	{	
+		// std::cout << it->second;
+	}
+}
+
+//////////////////////////////////  PRINT  ////////////////////////////////////
+
+void	Parse::printElement() {
+
+	for(auto it = this->mapElem.begin(); it != this->mapElem.end(); it++)
+	{	
+		std::cout << it->second;
+	}
+}
 
 void	Parse::printRule() {
 
 	std::cout << "rule: " << std::endl;
-	for (auto it = this->rule.begin() ; it != this->rule.end() ; ++it)
+	for (auto it = this->rule.begin() ; it != this->rule.end() ; it++)
 	{
 		std::cout << "-----------------------------------" << std::endl;
 		std::cout << "elem:      " << '"' << it->elem << '"' << std::endl;
@@ -214,7 +264,7 @@ void	Parse::printQueries() {
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////// IO /////////////////////////////////////
 
 void	Parse::openFile(std::string filename) {
 
@@ -247,7 +297,7 @@ void	Parse::readFile(std::string filename) {
 			line = removeComments(line);
 			if (line.length())
 			{
-				if (!parse(line, linePos))
+				if (!createRule(line, linePos))
 					error = true;
 			}
 		}
@@ -259,6 +309,8 @@ void	Parse::readFile(std::string filename) {
 	if (error)
 		throw Msg("Some error has been detected");
 }
+
+///////////////////////////////////// ELSE ////////////////////////////////////
 
 void	Parse::empty() {
 

@@ -20,7 +20,7 @@ A + B       <=> C       # A and B if and only if C
 A + B       <=> !C      # A and B if and only if not C
 	A + B       <=> !C
 A + B 			=> C
- # Clol+klol 			=> !Dlol
+  Clol+klol 			=> !Dlol
  # llol 			  	=> Dlol
 
 =AB		# Initial facts :  
@@ -35,6 +35,6 @@ A + B 			=> C
 
 		# 					X
 		# 					|
-		# 		A	-	-	+	-	-	B
+		# 		A	-	-	+	-	-	B -  -	+	-	-	H
 		# 								|
 		#						 C	-	+	-	D
