@@ -1,7 +1,10 @@
 
 #pragma once
 
+#include <project.hpp>
 #include <iostream>
+#include <vector>
+#include <sys/time.h>
 
 class mylib {
 
@@ -18,6 +21,8 @@ public:
 
 	static std::string 	trim(std::string str);
 	static double	 	utime();
+
+	static std::list<std::string>		split(std::string str);
 
 	class Msg : public std::exception {
 	public:

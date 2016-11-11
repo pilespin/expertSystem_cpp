@@ -1,6 +1,5 @@
 
 #include "mylib.hpp"
-#include <sys/time.h>
 
 mylib::mylib() 						{	this->_val = 0;	}
 
@@ -26,6 +25,35 @@ std::ostream &operator<<(std::ostream &o, mylib &c) {
 ///////////////////////////////////////////////////////////////////////////////
 int		mylib::getValue() const	{	return (this->_val);	}
 ///////////////////////////////////////////////////////////////////////////////
+
+std::list<std::string>	mylib::split(std::string str)
+{
+	int 		end;
+	std::string	tmp;
+
+	std::list<std::string> v;
+
+	while (str.length())
+	{
+		tmp.erase();
+		str = trim(str);
+		end = str.find_first_of(" 	");
+
+		if (end > -1)
+		{
+			tmp = str.substr(0, end);	
+			str = str.substr(end);
+			if (tmp.length())
+				v.push_back(tmp);
+		}
+		else
+		{
+			v.push_back(str);
+			break;
+		}
+	}
+	return (v);
+}
 
 std::string	mylib::trim(std::string str)
 {
@@ -55,6 +83,6 @@ double  	mylib::utime()
 	return (micro);
 }
 
-void	mylib::empty() {
+void		mylib::empty() {
 
 }

@@ -2,24 +2,29 @@
 #include <project.hpp>
 #include "Parse.hpp"
 #include "Branch.hpp"
+#include "mylib.hpp"
 
 int main()
 {
 	try
 	{
-	Parse p = Parse();
+		Parse p = Parse();
 
-	p.setMultipleCharInElement();
+		// p.setMultipleCharInElement();
 
-	p.readFile("rule");
-	p.calcRule();
-	p.createMap();
+		p.readFile("rule");
+		p.calcRule();
+		p.createMap();
+		p.getFact();
+		p.getQuerie();
 
-	// p.printRule();
-	p.printElement();
-	p.forwardChaining();
-	p.printFact();
-	p.printQueries();
+		p.forwardChaining();
+
+		p.printRule();
+		p.printElement();
+		p.printFact();
+		p.printQueries();
+
 
 
 	// Branch *a = new Branch("A", eNegative::False, eValue::True);

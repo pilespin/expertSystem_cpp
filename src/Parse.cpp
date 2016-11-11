@@ -7,6 +7,7 @@
 
 Parse::Parse() 						{	
 	this->_val = 0;
+	this->multipleCharInElement = false;
 }
 
 Parse::~Parse()						{}
@@ -29,19 +30,46 @@ std::ostream &operator<<(std::ostream &o, Parse &c) {
 	return (o);
 }
 ///////////////////////////////////////////////////////////////////////////////
-int		Parse::getValue() const					{	return (this->_val);					}	
+int		Parse::getValue() const					{	return (this->_val);					}
 bool	Parse::getMultipleCharInElement()		{	return (this->multipleCharInElement);	}
 void	Parse::setMultipleCharInElement() 		{	this->multipleCharInElement = true;		}
 ///////////////////////////////////////////////////////////////////////////////
 
 void	Parse::getFact() {
+
 	if (this->getMultipleCharInElement())
 	{
-
+		this->allfact = mylib::split(*this->fact.begin());
 	}
 	else
 	{
+		std::string tmp;
+		std::string str = *this->fact.begin();
+		for (auto it = str.begin(); it != str.end(); it++) {
+			tmp = *it;
+			tmp = mylib::trim(tmp);
+			if (tmp.length())
+				this->allfact.push_back(tmp);
+		}
+	}
+}
 
+void	Parse::getQuerie() {
+
+	if (this->getMultipleCharInElement())
+	{
+		this->allquerie = mylib::split(*this->querie.begin());
+	}
+	else
+	{
+		std::string tmp;
+		std::string str = *this->querie.begin();
+		for (auto it = str.begin(); it != str.end(); it++) {
+			tmp = *it;
+			tmp = mylib::trim(tmp);
+			if (tmp.length())
+				this->allquerie.push_back(tmp);
+		}
 	}
 }
 
@@ -254,6 +282,10 @@ void	Parse::printFact() {
 	{
 		std::cout << "fact: " << '"' << *it << '"' << std::endl;
 	}
+
+	for (auto it = this->allfact.begin(); it != this->allfact.end(); it++) {
+		std::cout << '"' << *it << '"'  <<std::endl;
+	}
 }
 
 void	Parse::printQueries() {
@@ -261,6 +293,9 @@ void	Parse::printQueries() {
 	for (auto it = this->querie.begin() ; it != this->querie.end() ; ++it)
 	{
 		std::cout << "querie: " << '"' << *it << '"' <<  std::endl;
+	}
+	for (auto it = this->allquerie.begin(); it != this->allquerie.end(); it++) {
+		std::cout << '"' << *it << '"'  <<std::endl;
 	}
 }
 
