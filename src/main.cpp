@@ -10,17 +10,14 @@ int main()
 	{
 		Parse p = Parse();
 
-		// p.setMultipleCharInElement();
+		p.setMultipleCharInElement();
 
 		p.readFile("rule");
-		p.calcRule();
-		p.createMap();
-		p.getFact();
-		p.getQuerie();
+		p.init();
 
 		p.forwardChaining();
 
-		p.printRule();
+		// p.printRule();
 		p.printElement();
 		p.printFact();
 		p.printQueries();

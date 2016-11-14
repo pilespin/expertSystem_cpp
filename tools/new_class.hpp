@@ -14,6 +14,7 @@ public:
 	int			getValue() const;
 	void		empty();
 
+	///////////////////////////// EXCEPTION ///////////////////////////////////
 	class Msg : public std::exception {
 	public:
 		Msg(std::string str) 						{	this->line += str;	}

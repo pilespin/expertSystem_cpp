@@ -9,6 +9,8 @@ Rule::Rule(std::string elem, eImplication implies, std::string impliqued) {
 	this->elem = elem;
 	this->implies = implies;
 	this->impliqued = impliqued;
+	this->isExecuted = false;
+
 }
 
 Rule::~Rule()						{}
@@ -37,7 +39,10 @@ std::ostream &operator<<(std::ostream &o, Rule &c) {
 	return (o);
 }
 ///////////////////////////////////////////////////////////////////////////////
-int		Rule::getValue() const	{	return (this->_val);	}
+int		Rule::getValue() const		{	return (this->_val);		}
+bool	Rule::getExecuted() const	{	return (this->isExecuted);	}
+
+void	Rule::setExecuted() 		{	this->isExecuted = true;	}
 ///////////////////////////////////////////////////////////////////////////////
 void	Rule::empty() {
 

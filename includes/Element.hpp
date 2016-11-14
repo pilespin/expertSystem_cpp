@@ -16,6 +16,10 @@ public:
 	std::string	getName() const;
 	eValue		getDefaultValue() const;
 	eValue		getValue() const;
+	// eValue		getGoodValue(std::string elem) const;
+	// eValue		getGoodValue(std::string elem, eValue val) const;
+	void		setValue(eValue value);
+	void		setDefaultValue(eValue value);
 	void		empty();
 
 	class Msg : public std::exception {

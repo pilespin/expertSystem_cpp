@@ -20,6 +20,7 @@ public:
 	static 	eLogicOperator	getLogicOperator(std::string str);
 	static 	std::string		getValue(eValue value);
 	static 	std::string		getImplication(eImplication value);
+	static	eValue			getOpositeValue(eValue value);
 
 	int			getValue() const;
 	void		empty();

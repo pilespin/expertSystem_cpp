@@ -14,7 +14,7 @@
 	
 NAME	=	expert
 
-CC		=	g++ -std=c++11 
+CC		=	g++ -std=c++14 -g
 FLAGS	=	-Wall -Wextra -Werror -Wfatal-errors
 
 SDIR	=	src/
@@ -39,7 +39,7 @@ all: compil
 compil:
 	@echo "\033[32m compiling $(NAME) >>> \c \033[0m"
 	@mkdir -p $(ODIR)
-	@make -j 8 $(NAME)
+	@make -j 99 $(NAME)
 	@echo "\033[37m END $(NAME)\033[0m"
 
 $(NAME): $(OBJ) $(SRC)

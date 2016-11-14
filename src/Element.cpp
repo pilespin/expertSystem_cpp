@@ -40,10 +40,31 @@ std::ostream &operator<<(std::ostream &o, Element &c) {
 	return (o);
 }
 ///////////////////////////////////////////////////////////////////////////////
-int				Element::getEmpty() const			{	return (this->_val);			}
-eValue			Element::getValue() const			{	return (this->value);			}
-eValue			Element::getDefaultValue() const	{	return (this->defaultValue);	}
-std::string		Element::getName() const			{	return (this->name);			}
+int				Element::getEmpty() const				{	return (this->_val);			}
+eValue			Element::getValue() const				{	return (this->value);			}
+
+// eValue			Element::getGoodValue(std::string elem) const {	
+// 	if (elem.find_first_of("!") == 0)
+// 	{
+// 		return (Enum::getOpositeValue(this->value));
+// 	}
+// 	return (this->value);
+// }
+
+// eValue			Element::getGoodValue(std::string elem, eValue val) const {	
+
+// 	if (elem.find_first_of("!") == 0)
+// 	{
+// 		return (Enum::getOpositeValue(val));
+// 	}
+// 	return (val);
+// }
+
+std::string		Element::getName() const				{	return (this->name);			}
+eValue			Element::getDefaultValue() const		{	return (this->defaultValue);	}
+
+void			Element::setValue(eValue value)			{	this->value = value;			}
+void			Element::setDefaultValue(eValue value)	{	this->value = value; this->defaultValue = value;		}
 ///////////////////////////////////////////////////////////////////////////////
 
 void	Element::empty() {

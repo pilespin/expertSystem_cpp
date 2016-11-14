@@ -19,7 +19,7 @@ NewName	&NewName::operator=(NewName const &rhs) {
 }
 
 std::ostream &operator<<(std::ostream &o, NewName &c) {
-	o << "NewName: " << c.getValue() << " ";
+	o << "I'm NewName class " << c.getValue();
 	return (o);
 }
 ///////////////////////////////////////////////////////////////////////////////

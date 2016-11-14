@@ -13,6 +13,10 @@ public:
 	// Rule &operator=(Rule const &rhs);
 
 	int			getValue() const;
+	bool		getExecuted() const;
+
+	void		setExecuted();
+	
 	void		empty();
 
 	class Msg : public std::exception {
@@ -25,6 +29,7 @@ public:
 
 public:
 	int 			_val;
+	bool			isExecuted;
 	std::string 	elem;
 	eImplication	implies;
 	std::string 	impliqued;

@@ -5,6 +5,7 @@
 #include <regex>
 #include <list>
 #include <map>
+#include "mylib.hpp"
 #include "Enum.hpp"
 
 	// 	ALLOWED_CHAR					"\\!?\\s*[A-Za-z]*"

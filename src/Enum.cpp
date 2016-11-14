@@ -56,6 +56,16 @@ std::string 	Enum::getImplication(eImplication value)
 	return (e[static_cast<int>(value)]);
 }
 
+eValue			Enum::getOpositeValue(eValue value){
+	if (value == eValue::True)
+		return (eValue::False);
+	else if (value == eValue::False)
+		return (eValue::True);
+	else
+		return (value);
+}
+
+
 void			Enum::empty() {
 
 }
