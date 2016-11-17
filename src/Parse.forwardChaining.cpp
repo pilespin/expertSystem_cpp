@@ -6,51 +6,68 @@
 
 void	Parse::forwardChaining() {
 
+	eValue res;
 	oneHasImpliqued = true;
 
 	while (oneHasImpliqued == true)
 	{
 		oneHasImpliqued = false;
 		for (auto it = this->rule.begin(); it != this->rule.end(); it++)
-		{	
+		{
 			this->setMagicTransformUndefinedToFalse();
 			
 			if (!it->getExecuted())
 			{
-				if (it->item.size() == 1)
+				res = computeRule(&*it);
+
+				if (res == eValue::True)
 				{
-					this->computeOneElement(it);
-				}
-				else
-				{
-					this->computeMultipleElement(it);
+					it->setExecuted();
+					setValueAtElement(it->impliqued, res);
 				}
 			}
 		}
 	}
 }
 
-void	Parse::computeOneElement(auto it) {
+eValue	Parse::computeRule(Rule *rule) {
 
-	auto Iitem = it->item.begin();
+	eValue	res = eValue::Undefined;
+
+	if (rule->item.size() == 1)
+	{
+		res = this->computeOneElement(rule);
+	}
+	else
+	{
+		res = this->computeMultipleElement(rule);
+	}
+	return (res);
+}
+
+
+eValue	Parse::computeOneElement(Rule *rule) {
+
+	auto Iitem = rule->item.begin();
 
 	Element	*first = this->getElement(*Iitem);
 	eValue	one = this->getGoodValue(*Iitem, first->getValue());
 
 	if (one == eValue::True)
 	{
-		it->setExecuted();
+		rule->setExecuted();
 		oneHasImpliqued = true;
-		setValueAtElement(it->impliqued, eValue::True);
 	}
+	return (one);
 }
 
-void	Parse::computeMultipleElement(auto it) {
+eValue	Parse::computeMultipleElement(Rule *rule) {
 
-	int 	size = it->item.size();
-	auto 	Iitem = it->item.begin();
+	int 	size = rule->item.size();
+	auto 	Iitem = rule->item.begin();
 	eValue	one;
 	eValue	two;
+	eValue	res = eValue::Undefined;
 
 	Element	*first = this->getElement(*Iitem);
 	one = this->getGoodValue(*Iitem, first->getValue());
@@ -64,16 +81,15 @@ void	Parse::computeMultipleElement(auto it) {
 			second = this->getElement(*Iitem);
 			two = this->getGoodValue(*Iitem, second->getValue());
 		}
-		auto Ioptr = it->optr.begin();
+		auto Ioptr = rule->optr.begin();
 		if (first && second)
 		{
-			eValue res = compute(one, *Ioptr, two);
+			res = compute(one, *Ioptr, two);
 
 			if (size == 1 && res == eValue::True)
 			{
-				it->setExecuted();
+				rule->setExecuted();
 				oneHasImpliqued = true;
-				setValueAtElement(it->impliqued, res);
 			}
 			else
 				one = res;
@@ -81,4 +97,5 @@ void	Parse::computeMultipleElement(auto it) {
 			Ioptr++;
 		}
 	}
+	return (res);
 }

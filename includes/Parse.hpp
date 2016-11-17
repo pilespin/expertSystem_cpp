@@ -62,8 +62,9 @@ private:
 	std::string		getGoodName(std::string elem);
 	eValue			getGoodValue(std::string elem, eValue val);
 
-	void			computeOneElement(auto it);
-	void			computeMultipleElement(auto it);
+	eValue			computeRule(Rule *rule);
+	eValue			computeOneElement(Rule *rule);
+	eValue			computeMultipleElement(Rule *rule);
 	
 	void			empty();
 	void			closeFile();

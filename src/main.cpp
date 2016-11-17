@@ -22,6 +22,10 @@ int main()
 		p.printTrueElement();
 		std::cout << "----------------------------------" << std::endl;
 
+		std::cout << "----------------------------------" << std::endl;
+		p.printAllElement();
+		std::cout << "----------------------------------" << std::endl;
+
 		p.printFact();
 		p.printQueries();
 
