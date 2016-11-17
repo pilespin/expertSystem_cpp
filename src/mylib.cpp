@@ -5,7 +5,7 @@ mylib::mylib() 						{	this->_val = 0;	}
 
 mylib::~mylib()						{}
 
-mylib::mylib(mylib const &src)	{	
+mylib::mylib(mylib const &src)	{
 	this->_val = src._val;
 }
 
@@ -41,7 +41,7 @@ std::list<std::string>	mylib::split(std::string str)
 
 		if (end > -1)
 		{
-			tmp = str.substr(0, end);	
+			tmp = str.substr(0, end);
 			str = str.substr(end);
 			if (tmp.length())
 				v.push_back(tmp);

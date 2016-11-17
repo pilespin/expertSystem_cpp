@@ -19,10 +19,9 @@ public:
 	void		empty();
 ///////////////////////////////////////////////////////////////////////////////
 
-	static std::string 	trim(std::string str);
-	static double	 	utime();
-
 	static std::list<std::string>		split(std::string str);
+	static std::string 					trim(std::string str);
+	static double	 					utime();
 
 	class Msg : public std::exception {
 	public:

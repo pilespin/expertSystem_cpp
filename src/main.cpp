@@ -18,7 +18,10 @@ int main()
 		p.forwardChaining();
 
 		// p.printRule();
-		p.printElement();
+		std::cout << "----------------------------------" << std::endl;
+		p.printTrueElement();
+		std::cout << "----------------------------------" << std::endl;
+
 		p.printFact();
 		p.printQueries();
 

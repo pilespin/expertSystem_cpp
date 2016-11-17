@@ -57,10 +57,12 @@ bool	Parse::checkIsNegative(std::string elem) {
 }
 
 std::string	Parse::getGoodName(std::string elem) {
-	if (elem.find_first_of("!") == 0)
+	if (checkIsNegative(elem))
 	{
 		elem.erase(0, 1);
 	}
+	// std::cout << "GetGoodName : " << elem << std::endl;
+
 	return (elem);
 }
 
@@ -71,7 +73,7 @@ eValue		Parse::getGoodValue(std::string elem, eValue val) {
 		if (val == eValue::Undefined)
 			val = eValue::False;
 	}
-	if (elem.find_first_of("!") == 0)
+	if (checkIsNegative(elem))
 	{
 		return (Enum::getOpositeValue(val));
 	}

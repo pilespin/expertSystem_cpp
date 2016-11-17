@@ -17,12 +17,14 @@ public:
 	void		init();
 	void 		setMultipleCharInElement();
 	void 		forwardChaining();
+	void 		backwardChaining();
 
 	////////// PRINT //////////
 	void	printRule();
 	void	printFact();
 	void	printQueries();
-	void	printElement();
+	void	printTrueElement();
+	void	printAllElement();
 
 	////////// IO //////////
 	void	openFile(std::string filename);
@@ -38,35 +40,39 @@ public:
 	};
 
 private:
-
-	void			empty();
-	void			closeFile();
-	void			getFact();
-	void			getQuerie();
-	void			calcRule();
+	
 	void			createMap();
 	void 			insertIntoMap(std::string tmp);
+	void			setInitialFact();
 	Element 		*getElement(std::string elem);
+	void			setValueAtElement(std::string elem, eValue val);
 
+	void			calcRule();
+	void			getFact();
+	void			getQuerie();
+	bool			createRule(std::string line, size_t linePos);
 	eImplication 	get_eImplicationByName(std::string implies);
 	std::string		removeComments(std::string line);
-	bool			createRule(std::string line, size_t linePos);
-	void			setInitialFact();
 
+	eValue			compute(eValue one, eLogicOperator optr, eValue two);
 	bool 			getMultipleCharInElement();
 	bool			getMagicTransformUndefinedToFalse();
 	void			setMagicTransformUndefinedToFalse();
-	void			setValueAtElement(std::string elem, eValue val);
 	bool			checkIsNegative(std::string elem);
 	std::string		getGoodName(std::string elem);
 	eValue			getGoodValue(std::string elem, eValue val);
-	eValue			compute(eValue one, eLogicOperator optr, eValue two);
-	// bool			computeMultipleElement(Rule it);
+
+	void			computeOneElement(auto it);
+	void			computeMultipleElement(auto it);
+	
+	void			empty();
+	void			closeFile();
 
 	////////// VAR //////////
 	int 			_val;
 	bool 			multipleCharInElement;
 	bool 			transformUndefinedToFalse;
+	bool 			oneHasImpliqued;
 	std::ifstream 	file;
 
 	std::map<std::string, Element>	mapElem;

@@ -26,7 +26,7 @@ void	Parse::setInitialFact() {
 
 	for (auto it = this->allfact.begin(); it != this->allfact.end(); it++)
 	{
-		std::cout << "Fact: " << *it << std::endl;
+		// std::cout << "Fact: " << *it << std::endl;
 		if (this->mapElem.count(*it))
 		{
 			this->mapElem[*it].setDefaultValue(eValue::True);
@@ -35,11 +35,13 @@ void	Parse::setInitialFact() {
 }
 
 Element *Parse::getElement(std::string elem) {
+	elem = this->getGoodName(elem);
 	if (this->mapElem.count(elem))
+	{
 		return (&this->mapElem[elem]);
+	}
 	else
 		throw Msg("Error get element in map");
-	// return (nullptr);
 }
 
 void	Parse::setValueAtElement(std::string elem, eValue val) {

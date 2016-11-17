@@ -7,11 +7,23 @@
 
 //////////////////////////////////  PRINT  ////////////////////////////////////
 
-void	Parse::printElement() {
+void	Parse::printAllElement() {
 
 	for (auto it = this->mapElem.begin(); it != this->mapElem.end(); it++)
 	{	
 		std::cout << it->second;
+	}
+}
+
+void	Parse::printTrueElement() {
+
+	if (this->mapElem.size())
+		std::cout << "Is True:" << std::endl;
+	for (auto it = this->mapElem.begin(); it != this->mapElem.end(); it++)
+	{	
+		if (it->second.getValue() == eValue::True)
+
+			std::cout << it->second.getName() << std::endl;
 	}
 }
 
