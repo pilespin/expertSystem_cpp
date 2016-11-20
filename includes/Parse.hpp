@@ -16,6 +16,7 @@ public:
 	int			getValue() const;
 	void		init();
 	void 		setMultipleCharInElement();
+	void		setMagicTransformUndefinedToFalse();
 	void 		forwardChaining();
 	void 		backwardChaining();
 
@@ -57,7 +58,6 @@ private:
 	eValue			compute(eValue one, eLogicOperator optr, eValue two);
 	bool 			getMultipleCharInElement();
 	bool			getMagicTransformUndefinedToFalse();
-	void			setMagicTransformUndefinedToFalse();
 	bool			checkIsNegative(std::string elem);
 	std::string		getGoodName(std::string elem);
 	eValue			getGoodValue(std::string elem, eValue val);

@@ -89,24 +89,23 @@ eValue		Parse::compute(eValue one, eLogicOperator optr, eValue two) {
 			return (eValue::True);
 		}
 	}
-
-	if (optr == eLogicOperator::Ou)
+	else if (optr == eLogicOperator::Ou)
 	{
 		if (one == eValue::True || two == eValue::True)
 		{
 			return (eValue::True);
 		}
 	}
-
-	if (optr == eLogicOperator::Xor)
+	else if (optr == eLogicOperator::Xor)
 	{
-		if ((one == eValue::True) ^ (two == eValue::True))
+		// if ((one == eValue::True) ^ (two == eValue::True)) 
+		if ((one == eValue::True && two == eValue::False) ||
+			(one == eValue::False && two == eValue::True))
 		{
 			return (eValue::True);
 		}
 	}
-
-	return (eValue::False);
+	return (eValue::Undefined);
 }
 
 ///////////////////////////////////// ELSE ////////////////////////////////////

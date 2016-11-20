@@ -26,10 +26,9 @@ void	Parse::setInitialFact() {
 
 	for (auto it = this->allfact.begin(); it != this->allfact.end(); it++)
 	{
-		// std::cout << "Fact: " << *it << std::endl;
-		if (this->mapElem.count(*it))
+		if (this->mapElem.count(getGoodName(*it)))
 		{
-			this->mapElem[*it].setDefaultValue(eValue::True);
+			this->mapElem[getGoodName(*it)].setDefaultValue(this->getGoodValue(*it, eValue::True));
 		}
 	}
 }

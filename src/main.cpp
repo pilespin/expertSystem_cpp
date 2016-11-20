@@ -11,6 +11,7 @@ int main()
 		Parse p = Parse();
 
 		p.setMultipleCharInElement();
+		// p.setMagicTransformUndefinedToFalse();
 
 		p.readFile("rule");
 		p.init();
