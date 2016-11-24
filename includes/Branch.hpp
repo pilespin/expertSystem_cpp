@@ -12,8 +12,8 @@ public:
 		Branch *left, Branch *right);
 	Branch(std::string name, eNegative negative, eValue value);
 	~Branch();
-	Branch(Branch const &src);
-	Branch &operator=(Branch const &rhs);
+	// Branch(Branch const &src);
+	// Branch &operator=(Branch const &rhs);
 
 	void		setValue(eValue value);
 	int			getEmpty() const;

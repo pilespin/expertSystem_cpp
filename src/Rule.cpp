@@ -15,12 +15,12 @@ Rule::Rule(std::string elem, eImplication implies, std::string impliqued) {
 
 Rule::~Rule()						{}
 
-Rule::Rule(Rule const &src)	{	
-	this->_val = src._val;
-	this->elem = src.elem;
-	this->implies = src.implies;
-	this->impliqued = src.impliqued;
-}
+// Rule::Rule(Rule const &src)	{	
+// 	this->_val = src._val;
+// 	this->elem = src.elem;
+// 	this->implies = src.implies;
+// 	this->impliqued = src.impliqued;
+// }
 
 // Rule	&Rule::operator=(Rule const &rhs) {
 

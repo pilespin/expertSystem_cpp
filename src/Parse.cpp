@@ -13,17 +13,18 @@ Parse::Parse() {
 Parse::~Parse()					{}
 
 Parse::Parse(Parse const &src)	{	
-	this->_val = src._val;
+	// this->_val = src._val;
+	static_cast<void>(src);
 }
 
-Parse	&Parse::operator=(Parse const &rhs) {
+// Parse	&Parse::operator=(Parse const &rhs) {
 
-	if (this != &rhs)
-	{
-		this->_val = rhs._val;
-	}
-	return (*this);
-}
+// 	if (this != &rhs)
+// 	{
+// 		this->_val = rhs._val;
+// 	}
+// 	return (*this);
+// }
 
 std::ostream &operator<<(std::ostream &o, Parse &c) {
 	o << "I'm Parse class" << c.getValue() << " ";

@@ -5,18 +5,7 @@ NewName::NewName() 						{	this->_val = 0;	}
 
 NewName::~NewName()						{}
 
-NewName::NewName(NewName const &src)	{	
-	this->_val = src._val;
-}
-
-NewName	&NewName::operator=(NewName const &rhs) {
-
-	if (this != &rhs)
-	{
-		this->_val = rhs._val;
-	}
-	return (*this);
-}
+NewName::NewName(NewName const &src)	{	static_cast<void>src;	}
 
 std::ostream &operator<<(std::ostream &o, NewName &c) {
 	o << "I'm NewName class " << c.getValue();

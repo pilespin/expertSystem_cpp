@@ -9,7 +9,7 @@ public:
 	NewName();
 	~NewName();
 	NewName(NewName const &src);
-	NewName &operator=(NewName const &rhs);
+	// NewName &operator=(NewName const &rhs);
 
 	int			getValue() const;
 	void		empty();

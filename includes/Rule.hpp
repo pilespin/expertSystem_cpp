@@ -9,7 +9,7 @@ public:
 	Rule(std::string elem, eImplication implies, std::string impliqued);
 	Rule();
 	~Rule();
-	Rule(Rule const &src);
+	// Rule(Rule const &src);
 	// Rule &operator=(Rule const &rhs);
 
 	int			getValue() const;

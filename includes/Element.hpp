@@ -9,8 +9,8 @@ public:
 	Element();
 	Element(std::string name, eValue value);
 	~Element();
-	Element(Element const &src);
-	Element &operator=(Element const &rhs);
+	// Element(Element const &src);
+	// Element &operator=(Element const &rhs);
 
 	int			getEmpty() const;
 	std::string	getName() const;

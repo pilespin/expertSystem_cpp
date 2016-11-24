@@ -13,8 +13,8 @@ class Enum {
 public:
 	Enum();
 	~Enum();
-	Enum(Enum const &src);
-	Enum &operator=(Enum const &rhs);
+	// Enum(Enum const &src);
+	// Enum &operator=(Enum const &rhs);
 
 	static 	std::string		getLogicOperator(eLogicOperator logicOperator);
 	static 	eLogicOperator	getLogicOperator(std::string str);

@@ -13,25 +13,25 @@ Element::Element(std::string name, eValue value) {
 
 Element::~Element()						{}
 
-Element::Element(Element const &src)	{	
-	this->_val = src._val;
-	this->name = src.name;
-	this->value = src.value;
-	this->defaultValue = src.value;
-}
+// Element::Element(Element const &src)	{	
+// 	this->_val = src._val;
+// 	this->name = src.name;
+// 	this->value = src.value;
+// 	this->defaultValue = src.value;
+// }
 
-Element	&Element::operator=(Element const &rhs) {
+// Element	&Element::operator=(Element const &rhs) {
 
-	if (this != &rhs)
-	{
-		this->_val = rhs._val;
-		this->_val = rhs._val;
-		this->name = rhs.name;
-		this->value = rhs.value;
-		this->defaultValue = rhs.value;
-	}
-	return (*this);
-}
+// 	if (this != &rhs)
+// 	{
+// 		this->_val = rhs._val;
+// 		this->_val = rhs._val;
+// 		this->name = rhs.name;
+// 		this->value = rhs.value;
+// 		this->defaultValue = rhs.value;
+// 	}
+// 	return (*this);
+// }
 
 std::ostream &operator<<(std::ostream &o, Element &c) {
 	o << "Name:             " << '"' << c.getName() << '"' << std::endl;

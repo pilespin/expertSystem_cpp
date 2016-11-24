@@ -14,7 +14,7 @@
 	
 NAME	=	expert
 
-CC		=	g++ -std=c++14 -g
+CC		=	g++ -std=c++11 -g
 FLAGS	=	-Wall -Wextra -Werror -Wfatal-errors
 
 SDIR	=	src/

@@ -5,18 +5,18 @@ Enum::Enum() 						{	this->_val = 0;	}
 
 Enum::~Enum()						{}
 
-Enum::Enum(Enum const &src)	{
-	this->_val = src._val;
-}
+// Enum::Enum(Enum const &src)	{
+// 	this->_val = src._val;
+// }
 
-Enum	&Enum::operator=(Enum const &rhs) {
+// Enum	&Enum::operator=(Enum const &rhs) {
 
-	if (this != &rhs)
-	{
-		this->_val = rhs._val;
-	}
-	return (*this);
-}
+// 	if (this != &rhs)
+// 	{
+// 		this->_val = rhs._val;
+// 	}
+// 	return (*this);
+// }
 
 std::ostream &operator<<(std::ostream &o, Enum &c) {
 	o << "Enum: " << c.getValue() << " ";
@@ -64,7 +64,6 @@ eValue			Enum::getOpositeValue(eValue value){
 	else
 		return (value);
 }
-
 
 void			Enum::empty() {
 

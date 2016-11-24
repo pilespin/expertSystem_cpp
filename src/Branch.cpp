@@ -35,18 +35,18 @@ void 		Branch::init() {
 
 Branch::~Branch()						{}
 
-Branch::Branch(Branch const &src)	{	
-	this->_val = src._val;
-}
+// Branch::Branch(Branch const &src)	{	
+// 	this->_val = src._val;
+// }
 
-Branch		&Branch::operator=(Branch const &rhs) {
+// Branch		&Branch::operator=(Branch const &rhs) {
 
-	if (this != &rhs)
-	{
-		this->_val = rhs._val;
-	}
-	return (*this);
-}
+// 	if (this != &rhs)
+// 	{
+// 		this->_val = rhs._val;
+// 	}
+// 	return (*this);
+// }
 
 std::ostream &operator<<(std::ostream &o, Branch &c) {
 	o << "Branch: " << c.getEmpty() << " ";

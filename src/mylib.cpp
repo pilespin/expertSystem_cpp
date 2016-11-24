@@ -5,18 +5,18 @@ mylib::mylib() 						{	this->_val = 0;	}
 
 mylib::~mylib()						{}
 
-mylib::mylib(mylib const &src)	{
-	this->_val = src._val;
-}
+// mylib::mylib(mylib const &src)	{
+// 	this->_val = src._val;
+// }
 
-mylib	&mylib::operator=(mylib const &rhs) {
+// mylib	&mylib::operator=(mylib const &rhs) {
 
-	if (this != &rhs)
-	{
-		this->_val = rhs._val;
-	}
-	return (*this);
-}
+// 	if (this != &rhs)
+// 	{
+// 		this->_val = rhs._val;
+// 	}
+// 	return (*this);
+// }
 
 std::ostream &operator<<(std::ostream &o, mylib &c) {
 	o << "mylib: " << c.getValue() << " ";
@@ -69,6 +69,21 @@ std::string	mylib::trim(std::string str)
 		return ("");
 }
 
+int			mylib::intlen(int x)
+{
+	int i;
+
+	if (x <= 0)
+		x = -x;
+	i = 1;
+	while (x >= 10)
+	{
+		x /= 10;
+		i++;
+	}
+	return (i);
+}
+
 double  	mylib::utime()
 {
 	int             sec;
@@ -81,6 +96,16 @@ double  	mylib::utime()
 	micro /= 1000000;
 	micro += sec;
 	return (micro);
+}
+
+void		mylib::sleep(int ms) {
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+}
+
+int			mylib::ratio(int maxVal1, int maxVal2, int yourVal) {
+
+	return (maxVal1 * yourVal) / maxVal2;
 }
 
 void		mylib::empty() {
