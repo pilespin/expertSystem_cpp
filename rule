@@ -24,9 +24,10 @@
 # llol 		=> Dlol
 
 
-C           => D        # C implies E
+# C ^ H       => D        # C implies E
+# B + !H      => E        # C implies E
+# !idiot 	    => intelligent        # C implies E
 B           => C        # C implies E
-# B           => !C        # C implies E
 A           => B        # C implies E
 
 # HasHair									=> Mammal
@@ -37,12 +38,12 @@ A           => B        # C implies E
 
 
 # =HasHair  HasClaws + SharpTeeth Spots + VeryFast		# Initial facts :  
-=A		# Initial facts : A, B and G are true. All others are false.  
+=A   !idiot	# Initial facts : A, B and G are true. All others are false.  
 
 		# If no facts are initially true, then a simple "=" followed
 		# by a newline is used
 
-?D	# Queries :
+? A B C	# Queries :
 # ?GVX	# Queries : What are G, V and X ?
 
 

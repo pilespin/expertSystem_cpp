@@ -9,10 +9,12 @@
 
 void	Parse::openFile(std::string filename) {
 
+
 	this->file.open(filename);
 	if (!this->file.is_open())
 	{
-		throw Msg("Error: Unable to open file " + filename);
+		if (filename.length() > 0)
+			throw Msg("Error: Unable to open file \"" + filename + "\"");
 	}
 }
 
@@ -23,6 +25,8 @@ void	Parse::closeFile() {
 
 void	Parse::readFile(std::string filename) {
 
+	filename = mylib::trim(filename);
+	
 	if (filename.length())
 		openFile(filename);
 

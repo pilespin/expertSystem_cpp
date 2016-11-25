@@ -4,30 +4,39 @@
 #include "Branch.hpp"
 #include "mylib.hpp"
 
-int main()
+
+int main(int ac, char **av)
 {
 	try
 	{
+		std::vector<std::string> arg(av, av + ac);
+		if (ac <= 1)
+		{
+			std::cerr << "Missing file" << std::endl;
+			exit(0);
+		}
+
 		Parse p = Parse();
 
-		p.setMultipleCharInElement();
-		// p.setMagicTransformUndefinedToFalse();
+		// p.setMultipleCharInElement();
+		p.setMagicTransformUndefinedToFalse();
 
-		p.readFile("rule");
+		p.readFile(arg[1]);
+			// p.readFile("rule");
 		p.init();
 
 		p.forwardChaining();
 
 		// p.printRule();
-		std::cout << "----------------------------------" << std::endl;
-		p.printTrueElement();
-		std::cout << "----------------------------------" << std::endl;
+		// std::cout << "----------------------------------" << std::endl;
+		// p.printTrueElement();
+		// std::cout << "----------------------------------" << std::endl;
 
-		std::cout << "----------------------------------" << std::endl;
-		p.printAllElement();
-		std::cout << "----------------------------------" << std::endl;
+		// std::cout << "----------------------------------" << std::endl;
+		// p.printAllElement();
+		// std::cout << "----------------------------------" << std::endl;
 
-		p.printFact();
+		// p.printFact();
 		p.printQueries();
 
 

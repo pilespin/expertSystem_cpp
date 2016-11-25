@@ -11,7 +11,7 @@ public:
 	NewName(NewName const &src);
 	// NewName &operator=(NewName const &rhs);
 
-	int			getValue() const;
+	int			getEmpty() const;
 	void		empty();
 
 	///////////////////////////// EXCEPTION ///////////////////////////////////
@@ -24,7 +24,7 @@ public:
 	};
 
 private:
-	int _val;
+	int nothing;
 };
 
 std::ostream &operator<<(std::ostream &o, NewName &c);

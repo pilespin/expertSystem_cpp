@@ -8,11 +8,11 @@ NewName::~NewName()						{}
 NewName::NewName(NewName const &src)	{	static_cast<void>src;	}
 
 std::ostream &operator<<(std::ostream &o, NewName &c) {
-	o << "I'm NewName class " << c.getValue();
+	o << "I'm NewName class " << c.getEmpty();
 	return (o);
 }
 ///////////////////////////////////////////////////////////////////////////////
-int		NewName::getValue() const	{	return (this->_val);	}
+int		NewName::getEmpty() const	{	return (this->nothing);	}
 ///////////////////////////////////////////////////////////////////////////////
 void	NewName::empty() {
 

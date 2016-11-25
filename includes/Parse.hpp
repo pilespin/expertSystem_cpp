@@ -81,6 +81,7 @@ private:
 	std::list<Rule>			rule;
 	std::list<std::string>	fact;
 	std::list<std::string>	querie;
+	
 	std::list<std::string>	allfact;
 	std::list<std::string>	allquerie;
 };

@@ -66,11 +66,15 @@ void	Parse::printFact() {
 
 void	Parse::printQueries() {
 
-	for (auto it = this->querie.begin() ; it != this->querie.end() ; ++it)
-	{
-		std::cout << "querie: " << '"' << *it << '"' <<  std::endl;
-	}
+	// for (auto it = this->querie.begin() ; it != this->querie.end() ; ++it)
+	// {
+		// std::cout << "querie: " << '"' << *it << '"' <<  std::endl;
+	// }
 	for (auto it = this->allquerie.begin(); it != this->allquerie.end(); it++) {
-		std::cout << '"' << *it << '"'  <<std::endl;
+		std::cout << *it << " = ";
+		if (getMagicTransformUndefinedToFalse() && getElement(*it)->getValue() == eValue::Undefined)
+			std::cout << Enum::getValue(eValue::False) << std::endl;
+		else
+			std::cout << Enum::getValue(getElement(*it)->getValue()) << std::endl;
 	}
 }

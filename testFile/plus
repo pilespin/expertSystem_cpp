@@ -1,0 +1,9 @@
+
+C           => D
+A + B       => C
+C + A + D   => E
+E   		=> !F
+
+=ABF		# Initial facts :
+
+?ABCDEF 	# Queries :
