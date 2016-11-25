@@ -23,7 +23,7 @@ if (is_dir($dir)) {
 				{
 					$countAll++;
 					$res = shell_exec("./$exec $dir/$file > tmp");
-					$res = shell_exec("diff -BZ tmp $dir/$file$sufix");
+					$res = shell_exec("diff -Bw tmp $dir/$file$sufix");
 					unlink("tmp");
 					if ($res)
 					{

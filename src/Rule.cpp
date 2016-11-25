@@ -35,7 +35,7 @@ Rule::~Rule()						{}
 // }
 
 std::ostream &operator<<(std::ostream &o, Rule &c) {
-	o << "Rule: " << c.getValue() << " ";
+	o << "Rule: " << c.elem << " " << "implies" << " " << c.impliqued;
 	return (o);
 }
 ///////////////////////////////////////////////////////////////////////////////

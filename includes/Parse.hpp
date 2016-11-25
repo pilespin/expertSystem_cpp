@@ -73,8 +73,10 @@ private:
 	int 			_val;
 	bool 			multipleCharInElement;
 	bool 			transformUndefinedToFalse;
-	bool 			oneHasImpliqued;
 	std::ifstream 	file;
+
+	// unsigned long long	ruleImpliqued;
+	// unsigned long long	oldRuleImpliqued;
 
 	std::map<std::string, Element>	mapElem;
 

@@ -5,32 +5,42 @@
 
 void	Parse::forwardChaining() {
 
-	// double 				timeStart = mylib::utime();
-	// unsigned long long 	iteration = 0;
-	
-	oneHasImpliqued = true;
-	// this->setMagicTransformUndefinedToFalse();
+	// double 				timeStart 		= mylib::utime();
+	unsigned long long 	iteration 	= 0;
+	unsigned long long 	passage		= 0;
+	unsigned long long 	maxPassage	= this->rule.size();
 
-	while (oneHasImpliqued == true)
+	bool printBadRule = false;
+	bool error = false;
+
+	while (passage <= maxPassage + 1)
 	{
-		oneHasImpliqued = false;
+		if (passage > maxPassage)
+			printBadRule = true;
+		passage++;
+
 		for (auto it = this->rule.begin(); it != this->rule.end(); it++)
 		{
-			// iteration++;
+			iteration++;
 			eValue res 		= getGoodValue(it->impliqued, this->computeRule(&*it));
 			eValue oldValue	= this->getElement(it->impliqued)->getValue();
 
 			if (res != oldValue)
 			{
-				oneHasImpliqued = true;
+				if (printBadRule)
+				{
+					error = true;
+					std::cout << "Conflict: " << *it << std::endl;
+				}
 				setValueAtElement(it->impliqued, res);
-				// setValueAtElement(it->impliqued, getGoodValue(it->impliqued, res));
 			}
 		}
 	}
-	// double timeEnd = mylib::utime();
 
 	// std::cout << this->rule.size() << " rules" << std::endl;
 	// std::cout << iteration << " iterations" << std::endl;
-	// std::cout << (timeEnd - timeStart) * 1000 << " ms" << std::endl;
+	// std::cout << (mylib::utime() - timeStart) * 1000 << " ms" << std::endl;
+
+	if (error)
+		throw Msg("Error some conflict in rule has been detected");	
 }

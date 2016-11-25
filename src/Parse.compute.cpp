@@ -3,6 +3,34 @@
 #include "Element.hpp"
 #include "Parse.hpp"
 
+eValue		Parse::compute(eValue one, eLogicOperator optr, eValue two) {	
+
+	if (optr == eLogicOperator::Et)
+	{
+		if (one == eValue::True && two == eValue::True)
+		{
+			return (eValue::True);
+		}
+	}
+	else if (optr == eLogicOperator::Ou)
+	{
+		if (one == eValue::True || two == eValue::True)
+		{
+			return (eValue::True);
+		}
+	}
+	else if (optr == eLogicOperator::Xor)
+	{
+		// if ((one == eValue::True) ^ (two == eValue::True)) 
+		if ((one == eValue::True && two == eValue::False) ||
+			(one == eValue::False && two == eValue::True))
+		{
+			return (eValue::True);
+		}
+	}
+	return (eValue::Undefined);
+}
+
 eValue	Parse::computeRule(Rule *rule) {
 
 	eValue	res = eValue::Undefined;
@@ -69,7 +97,7 @@ eValue	Parse::computeMultipleElement(Rule *rule) {
 				break;
 			}
 			else
-				one = res;
+				one = this->getGoodValue("", res);
 
 			Ioptr++;
 		}
