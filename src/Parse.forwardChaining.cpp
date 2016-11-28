@@ -22,8 +22,14 @@ void	Parse::forwardChaining() {
 		for (auto it = this->rule.begin(); it != this->rule.end(); it++)
 		{
 			iteration++;
-			eValue res 		= getGoodValue(it->impliqued, this->computeRule(&*it));
+			eValue res 	= this->computeRule(&*it);
+			if (res == eValue::Undefined)
+				continue;
+			res 			= getGoodValue(it->impliqued, res);
 			eValue oldValue	= this->getElement(it->impliqued)->getValue();
+
+			// std::cout <<"res: " << Enum::getValue(res) << std::endl;
+			// std::cout <<"res2: " << Enum::getValue(restmp) << std::endl;
 
 			if (res != oldValue)
 			{

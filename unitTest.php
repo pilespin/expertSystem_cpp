@@ -45,7 +45,7 @@ if (is_dir($dir)) {
 		else
 			echo "$COLORRED";
 
-		echo "Total $countOK/$countAll";
+		echo " ---------- Total $countOK/$countAll ----------";
 		echo "$COLORCLOSE\n";
 	}
 }

@@ -1,7 +1,13 @@
 A = True
-B = False
+B = True
 C = True
-D = False
-E = False
+D = True
+E = True
 F = False
 G = True
+H = True
+V = False
+W = False
+G = True
+V = False
+X = False

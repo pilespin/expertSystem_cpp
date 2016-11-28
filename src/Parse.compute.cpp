@@ -22,8 +22,8 @@ eValue		Parse::compute(eValue one, eLogicOperator optr, eValue two) {
 	else if (optr == eLogicOperator::Xor)
 	{
 		// if ((one == eValue::True) ^ (two == eValue::True)) 
-		if ((one == eValue::True && two == eValue::False) ||
-			(one == eValue::False && two == eValue::True))
+		if ((one == eValue::True && (two == eValue::False || two == eValue::Undefined)) ||
+			((one == eValue::False || one == eValue::Undefined) && two == eValue::True))
 		{
 			return (eValue::True);
 		}
