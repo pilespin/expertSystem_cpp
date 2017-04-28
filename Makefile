@@ -24,10 +24,20 @@ F_EXT	=	cpp
 H_EXT	=	hpp
 FOLDER	=	-I $(HDIR)
 
+ifeq ($(shell uname), Linux)
+NBTHREADS	=`cat /proc/cpuinfo | grep processor | wc -l`
+else ifeq ($(shell uname), Darwin)
+NBTHREADS	=`sysctl -a | grep hw.logicalcpu: | cut -d ' ' -f 2`
+else
+NBTHREADS	= 1
+endif
+$(eval NBTHREADS=$(shell echo $$(($(NBTHREADS)*2))))
+
+MAKE_OPTS 			= --no-print-directory
+MAKE_OPTS_THREAD 	= -j$(NBTHREADS)
+
 SRCA	=	$(shell cd $(SDIR) && ls -1 *.$(F_EXT))
-
 SRCH	=	$(shell cd $(HDIR) && ls -1 *.$(H_EXT))
-
 SRCO	=	$(SRCA:$(F_EXT)=.o)
 
 SRC 	=	$(patsubst %.$(F_EXT), $(SDIR)%.$(F_EXT), $(SRCA))
@@ -37,9 +47,9 @@ OBJ		=	$(patsubst %.$(F_EXT), $(ODIR)%.o, $(SRCA))
 all: compil
 
 compil:
-	@echo "\033[32m compiling $(NAME) >>> \c \033[0m"
+	@echo "Begin compilation with $(NBTHREADS) thread"
 	@mkdir -p $(ODIR)
-	@make -j 99 $(NAME)
+	@make $(NAME) $(MAKE_OPTS) $(MAKE_OPTS_THREAD)
 	@echo "\033[37m END $(NAME)\033[0m"
 
 $(NAME): $(OBJ) $(SRC)

@@ -53,12 +53,11 @@ eValue	Parse::computeOneElement(Rule *rule) {
 	Element	*first = this->getElement(*Iitem);
 	eValue	one = this->getGoodValue(*Iitem, first->getValue());
 
-	// if (one == eValue::True)
-	// {
-		// rule->setExecuted();
-		// oneHasImpliqued = true;
-	// }
-	return (one);
+	if (one == eValue::True)
+	{
+		return (one);
+	}
+	return (eValue::Undefined);
 }
 
 eValue	Parse::computeMultipleElement(Rule *rule) {

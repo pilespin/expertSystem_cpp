@@ -28,9 +28,6 @@ void	Parse::forwardChaining() {
 			res 			= getGoodValue(it->impliqued, res);
 			eValue oldValue	= this->getElement(it->impliqued)->getValue();
 
-			// std::cout <<"res: " << Enum::getValue(res) << std::endl;
-			// std::cout <<"res2: " << Enum::getValue(restmp) << std::endl;
-
 			if (res != oldValue)
 			{
 				if (printBadRule)
