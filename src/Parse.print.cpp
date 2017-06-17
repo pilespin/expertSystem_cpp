@@ -22,7 +22,6 @@ void	Parse::printTrueElement() {
 	for (auto it = this->mapElem.begin(); it != this->mapElem.end(); it++)
 	{	
 		if (it->second.getValue() == eValue::True)
-
 			std::cout << it->second.getName() << std::endl;
 	}
 }
@@ -72,13 +71,13 @@ void	Parse::printQueries() {
 	// }
 	for (auto it = this->allquerie.begin(); it != this->allquerie.end(); it++) {
 		std::cout << *it << " = ";
-		if (getMagicTransformUndefinedToFalse() && getElement(*it)->getValue() == eValue::Undefined)
 		// if (getMagicTransformUndefinedToFalse() && getElement(*it)->getValue() == eValue::Undefined)
-		{
-			// if (getElement(*it)->getValue() == eValue::Undefined)
-			std::cout << Enum::getValue(eValue::False) << std::endl;
-		}
-		else
+		// // if (getMagicTransformUndefinedToFalse() && getElement(*it)->getValue() == eValue::Undefined)
+		// {
+		// 	// if (getElement(*it)->getValue() == eValue::Undefined)
+		// 	std::cout << Enum::getValue(eValue::False) << std::endl;
+		// }
+		// else
 			std::cout << Enum::getValue(getElement(*it)->getValue()) << std::endl;
 	}
 }

@@ -10,13 +10,13 @@ void	Parse::forwardChaining() {
 	unsigned long long 	passage		= 0;
 	unsigned long long 	maxPassage	= this->rule.size();
 
-	bool printBadRule = false;
-	bool error = false;
+	// bool printBadRule = true;
+	// bool error = false;
 
 	while (passage <= maxPassage + 1)
 	{
-		if (passage > maxPassage)
-			printBadRule = true;
+		// if (passage > maxPassage)
+			// printBadRule = true;
 		passage++;
 
 		for (auto it = this->rule.begin(); it != this->rule.end(); it++)
@@ -30,12 +30,14 @@ void	Parse::forwardChaining() {
 
 			if (res != oldValue)
 			{
-				if (printBadRule)
+				if (passage == maxPassage -1)
 				{
-					error = true;
-					std::cout << "Conflict: " << *it << std::endl;
+					// error = true;
+					// std::cout << "Conflict: " << *it << std::endl;
+					setValueAtElement(it->impliqued, eValue::Undefined);
 				}
-				setValueAtElement(it->impliqued, res);
+				else
+					setValueAtElement(it->impliqued, res);
 			}
 		}
 	}
@@ -44,6 +46,6 @@ void	Parse::forwardChaining() {
 	// std::cout << iteration << " iterations" << std::endl;
 	// std::cout << (mylib::utime() - timeStart) * 1000 << " ms" << std::endl;
 
-	if (error)
-		throw Msg("Error some conflict in rule has been detected");	
+	// if (error)
+		// throw Msg("Error some conflict in rule has been detected");	
 }

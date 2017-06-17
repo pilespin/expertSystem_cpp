@@ -19,7 +19,7 @@ int main(int ac, char **av)
 		Parse p = Parse();
 
 		// p.setMultipleCharInElement();
-		p.setMagicTransformUndefinedToFalse();
+		// p.setMagicTransformUndefinedToFalse();
 
 		p.readFile(arg[1]);
 			// p.readFile("rule");

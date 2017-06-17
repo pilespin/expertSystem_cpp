@@ -7,7 +7,7 @@
 Parse::Parse() {	
 	this->_val = 0;
 	this->multipleCharInElement = false;
-	this->transformUndefinedToFalse = false;
+	// this->transformUndefinedToFalse = false;
 }
 
 Parse::~Parse()					{}
@@ -33,10 +33,10 @@ std::ostream &operator<<(std::ostream &o, Parse &c) {
 ///////////////////////////////////////////////////////////////////////////////
 int		Parse::getValue() const						{	return (this->_val);						}
 bool	Parse::getMultipleCharInElement()			{	return (this->multipleCharInElement);		}
-bool	Parse::getMagicTransformUndefinedToFalse()	{	return (this->transformUndefinedToFalse);	}
+// bool	Parse::getMagicTransformUndefinedToFalse()	{	return (this->transformUndefinedToFalse);	}
 
 void	Parse::setMultipleCharInElement() 			{	this->multipleCharInElement = true;			}
-void	Parse::setMagicTransformUndefinedToFalse() 	{	this->transformUndefinedToFalse = true; 	}
+// void	Parse::setMagicTransformUndefinedToFalse() 	{	this->transformUndefinedToFalse = true; 	}
 ///////////////////////////////////////////////////////////////////////////////
 
 void	Parse::init() {
@@ -69,11 +69,11 @@ std::string	Parse::getGoodName(std::string elem) {
 
 eValue		Parse::getGoodValue(std::string elem, eValue val) {	
 
-	if (getMagicTransformUndefinedToFalse())
-	{
-		if (val == eValue::Undefined)
-			val = eValue::False;
-	}
+	// if (getMagicTransformUndefinedToFalse())
+	// {
+	// 	if (val == eValue::Undefined)
+	// 		val = eValue::False;
+	// }
 	if (checkIsNegative(elem))
 	{
 		return (Enum::getOpositeValue(val));

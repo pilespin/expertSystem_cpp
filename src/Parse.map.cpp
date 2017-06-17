@@ -7,7 +7,8 @@
 void 	Parse::insertIntoMap(std::string tmp) {
 	if (tmp.find_first_of("!") == 0)
 		tmp.erase(0, 1);
-	this->mapElem[tmp] = Element(tmp, eValue::Undefined);
+	// this->mapElem[tmp] = Element(tmp, eValue::Undefined);
+	this->mapElem[tmp] = Element(tmp, eValue::False);
 }
 
 void	Parse::createMap() {
